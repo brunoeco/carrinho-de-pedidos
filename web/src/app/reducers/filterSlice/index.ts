@@ -3,10 +3,10 @@ import { RootState } from '../../store';
 import { FilterState, PriceType } from '../types';
 
 const initialState: FilterState = {
-    category: [],
+    category: '',
     price: {
-        start: 0,
-        end: 50000,
+        min: 0,
+        max: null,
     }
 };
 
@@ -14,34 +14,11 @@ export const filterSlice = createSlice({
     name: 'cart',
     initialState: initialState,
     reducers: {
-        addCategory: (state, action: PayloadAction<string>) => {
-            const categoryExists = state.category.find(category => (
-                category === action.payload
-            ));
-
-            if(categoryExists) return { ...state };
-            
-            
+        changeCategory: (state, action: PayloadAction<string>) => {
             return {
                 ...state,
-                category: [
-                    ...state.category,
-                    action.payload
-                ]
+                category: action.payload
             };
-        },
-        removeCategory: (state, action: PayloadAction<string>) => {
-           const categoryExists = state.category.filter(category => (
-                category !== action.payload
-            ));
-
-            return {
-                ...state,
-                category: [
-                    ...categoryExists
-                ]
-            };
-
         },
 
         changePrice: (state, action: PayloadAction<PriceType>) => {
@@ -56,7 +33,7 @@ export const filterSlice = createSlice({
     }
 });
 
-export const { addCategory, removeCategory, changePrice } = filterSlice.actions;
+export const { changeCategory, changePrice } = filterSlice.actions;
 
 export const selectFilter = (state: RootState) => state.filter;
 

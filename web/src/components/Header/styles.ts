@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const HeaderWrapper = styled.div`
-    background-color: #FFFFFF;
+    background-color: ${props => props.theme.backgroundLightColor};
     box-shadow: 1px 1px 3px rgba(0,0,0, 0.2)
 `;
 
@@ -16,7 +16,7 @@ export const MenuList = styled.div`
     gap: 4vw;
     margin: 0 7vw;
     height: 80px;
-    color: #ACFC7F;
+    color: ${props => props.theme.primaryDarkColor};
 
 
     a {
@@ -24,7 +24,11 @@ export const MenuList = styled.div`
         font-family: 'Roboto', sans-serif;
         font-weight: 700;
         text-decoration: none;
-        color: #ACFC7F; 
+        color: ${props => props.theme.primaryDarkColor}; 
+
+        :hover {
+            filter: brightness(90%);
+        }
     }
 `;
 
@@ -39,7 +43,7 @@ export const SearchForm = styled.form`
         padding-left: 15px;
         padding-right: 40px;
 
-        background-color: #F8F8F8;
+        background-color: ${props => props.theme.backgroundColor};
     }
 
     button {
@@ -73,26 +77,3 @@ export const IconLinks = styled.div`
         top: -5px;
     }
 `
-
-export const SubMenuList = styled.div`
-    height: 37px;
-    background-color: #ff6500; 
-
-    nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        margin: 0 7vw;
-        height: 100%;
-
-        a {
-            font-size: 0.9rem;
-            font-family: 'Roboto', sans-serif;
-            font-weight: 700;
-            text-decoration: none;
-            color: #ffffff;
-        }
-    }
-
-`;

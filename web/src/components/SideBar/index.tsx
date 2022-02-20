@@ -21,20 +21,24 @@ export default function Sidebar() {
                 <div>
                     <span>Categorias</span>
                     <div>
-                        <input type="checkbox" name="productType1" id="celular" />
+                        <input type="radio" name="productType" id="todos" />
+                        <label htmlFor="todos">Todos</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="productType" id="celular" />
                         <label htmlFor="celular">Celular</label>
                     </div>
                     <div>
-                        <input type="checkbox" name="productType2" id="computador" />
+                        <input type="radio" name="productType" id="computador" />
                         <label htmlFor="computador">Computador</label>
                     </div>
                         <div>
                             
-                        <input type="checkbox" name="productType3" id="acessorios" />
+                        <input type="radio" name="productType" id="acessorios" />
                         <label htmlFor="acessorios">Acessórios</label>
                     </div>
                     <div>
-                        <input type="checkbox" name="productType4" id="componentes" />
+                        <input type="radio" name="productType" id="componentes" />
                         <label htmlFor="componentes">Componentes</label>
                     </div>
                 </div>

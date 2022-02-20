@@ -6,7 +6,7 @@ import { selectCart } from '../../app/reducers/cartSlice';
 import { selectUser } from '../../app/reducers/userSlice';
 
 import { Link } from 'react-router-dom';
-import { HeaderWrapper, IconLinks, Profile, Logo, MenuList, SearchForm, SubMenuList } from './styles';
+import { HeaderWrapper, IconLinks, Profile, Logo, MenuList, SearchForm } from './styles';
 
 import logoImage from '../../assets/logo.png';
 
@@ -50,17 +50,6 @@ export default function Header() {
                 </IconLinks>
                 
             </MenuList>
-
-            {/* <SubMenuList>
-                <nav>
-                    <Link to='/'>TODOS OS DEPARTAMENTOS</Link>
-                    <Link to='/'>LANÇAMENTOS</Link>
-                    <Link to='/'>DESTAQUES</Link>
-                    <Link to='/'>PC GAMER</Link>
-                    <Link to='/'>ELETRÔNICOS</Link>
-                    <Link to='/'>SEJA PRIME</Link>
-                </nav>
-            </SubMenuList> */}
         </HeaderWrapper>
     )
 }

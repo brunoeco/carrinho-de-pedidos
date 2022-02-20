@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const ProductWrapper = styled.div`
     position: relative;
     border-radius: 5px;
-    background-color: #ffffff; 
+    background-color: ${props => props.theme.backgroundLightColor}; 
 
     box-shadow: 2px 2px 4px 1px rgba(0,0,0,0.1)
 `;
@@ -50,7 +50,7 @@ export const ProductDescription = styled.div`
         heigth: 100%;
         font-size: 1.5rem;
         font-weight: 700;
-        color: #ACFC7F;
+        color: ${props => props.theme.primaryDarkColor};
     }
 `;
 
@@ -64,13 +64,15 @@ export const AddCartButton = styled.button`
 
     border: none;
     border-radius: 5px;
-    background-color: #ACFC7F;
+    background-color: ${props => props.theme.primaryDarkColor};
     color: #fff;
     font-weight: 700;
+
+    transition: 0.3s ease;
     
     cursor: pointer;
 
     :hover {
-        background-color: #90E97B;
+        filter: brightness(90%);
     }
 `;

@@ -1,10 +1,10 @@
 
 export type PriceType = {
-    start: number;
-    end: number;
+    min: number;
+    max: number | null;
 }
 
 export type FilterState = {
-    category: Array<string>;
+    category: string;
     price: PriceType;
 };

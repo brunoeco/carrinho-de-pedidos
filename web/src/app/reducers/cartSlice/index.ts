@@ -7,8 +7,6 @@ import { RootState } from '../../store';
 export function getCacheProducts() {
     const cartItems = localStorage.getItem('cartProductsRMT');
 
-    console.log(typeof(cartItems));
-
     if(cartItems){
         const cartItemsParsed: ICart = JSON.parse(cartItems);
 
@@ -87,10 +85,15 @@ export const cartSlice = createSlice({
             ];
 
         },
+
+        cleanCart: (state) => {
+            localStorage.removeItem('cartProductsRMT');
+            return initialState;
+        },
     }
 });
 
-export const { addProduct, removeProduct, removeQuantityOfProduct } = cartSlice.actions;
+export const { addProduct, removeProduct, removeQuantityOfProduct, cleanCart } = cartSlice.actions;
 
 export const selectCart = (state: RootState) => state.cart;
 

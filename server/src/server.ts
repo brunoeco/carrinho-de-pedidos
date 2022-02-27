@@ -1,11 +1,10 @@
-import express, { Request } from 'express';
+import express from 'express';
 import cors from 'cors';
-import { fakeDb } from './fakeDb';
-import { UserGetProps, UserType } from './types';
 import routes from './routes';
 
 const app = express();
 
+app.use(express.json());
 app.use(cors())
 
 app.use(routes);

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const HeaderWrapper = styled.div`
     background-color: ${props => props.theme.backgroundLightColor};
-    box-shadow: 1px 1px 3px rgba(0,0,0, 0.2)
+    box-shadow: 1px 1px 3px rgba(0,0,0, 0.2);
 `;
 
 export const Logo = styled.img`
@@ -77,3 +77,13 @@ export const IconLinks = styled.div`
         top: -5px;
     }
 `
+
+export const LogoutButton = styled.button`
+    border: none;
+    background: none;
+    color: ${props => props.theme.primaryDarkColor};
+    font-size: 0.9rem;
+    font-weight: 700;
+
+    cursor: pointer;
+`;

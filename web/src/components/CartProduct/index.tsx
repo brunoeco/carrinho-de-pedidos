@@ -4,8 +4,9 @@ import productImage from '../../assets/image.png';
 import { useAppDispatch } from '../../app/hooks';
 import { ICartItem } from '../../types/product';
 
-import { CartProductWrapper, ProductImage } from './styles';
+import { AddButton, CartProductWrapper, ProductImage, RemoveButton, ProductDescription, AddProduct } from './styles';
 import { addProduct, removeProduct, removeQuantityOfProduct } from '../../app/reducers/cartSlice';
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
 export default function CartProduct(product: ICartItem) {
     const dispatch = useAppDispatch();
@@ -28,17 +29,22 @@ export default function CartProduct(product: ICartItem) {
             <td>
                 <ProductImage src={productImage} alt="product" />
             </td>
-            <td>
+            <ProductDescription>
                 <h2>{product.name}</h2>
-            </td>
+                <p>{product.description}</p>
+            </ProductDescription>
             <td>
-                <div>
-                    <button onClick={handleRemoveQuatityOfProducts}>-</button>
+                <AddProduct>
+                    <AddButton onClick={handleRemoveQuatityOfProducts}>
+                        <IoIosArrowDown size='15' />
+                    </AddButton>
                     <span>{product.quantity}</span>
-                    <button onClick={handleAddProducts}>+</button>
-                </div>
+                    <AddButton onClick={handleAddProducts}>
+                        <IoIosArrowUp size='15' />
+                    </AddButton>
+                </AddProduct>
                 <div>
-                    <button onClick={handleRemoveProducts}>Remover</button>
+                    <RemoveButton onClick={handleRemoveProducts}>Remover</RemoveButton>
                 </div>
             </td>
             <td>

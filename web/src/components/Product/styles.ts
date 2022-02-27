@@ -6,7 +6,7 @@ export const ProductWrapper = styled.div`
     border-radius: 5px;
     background-color: ${props => props.theme.backgroundLightColor}; 
 
-    box-shadow: 2px 2px 4px 1px rgba(0,0,0,0.1)
+    box-shadow: 2px 2px 4px 1px rgba(0,0,0,0.1);
 `;
 
 export const ProductInfo = styled.div`
@@ -35,7 +35,7 @@ export const ProductDescription = styled.div`
     h2 {
         margin: 0;
         margin-bottom: 20px;
-        height: 50px;
+        height: 58px;
         font-size: 1rem;
 
         display: -webkit-box;

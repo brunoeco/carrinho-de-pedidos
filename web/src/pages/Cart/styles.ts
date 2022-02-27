@@ -63,4 +63,5 @@ export const CartFinishButton = styled.button`
     border: none;
     color: ${props => props.theme.backgroundLightColor};
     background-color: ${props => props.theme.primaryDarkColor};
+    font-weight: 700;
 `;

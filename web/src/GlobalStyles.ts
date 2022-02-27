@@ -20,5 +20,5 @@ export const GlobalStyles = createGlobalStyle`
 `;
 
 export const Container = styled.main`
-    margin: 50px 7vw 0 7vw;
+    margin: 50px 7vw 50px 7vw;
 `;

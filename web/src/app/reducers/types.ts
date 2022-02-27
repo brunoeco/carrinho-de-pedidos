@@ -7,4 +7,5 @@ export type PriceType = {
 export type FilterState = {
     category: string;
     price: PriceType;
+    search: string;
 };

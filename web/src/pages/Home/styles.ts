@@ -13,3 +13,9 @@ export const ProductsListWrapper = styled.div`
 
     width: 100%;
 `;
+
+export const PaginationButtons = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 5px;
+`

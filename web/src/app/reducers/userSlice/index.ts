@@ -23,12 +23,12 @@ export const userSlice = createSlice({
     initialState: initialState,
     reducers: {
         login: (state, action: PayloadAction<IUser>) => {
-            localStorage.setItem('cartProductsRMT', JSON.stringify(action.payload));
+            localStorage.setItem('userRMT', JSON.stringify(action.payload));
             return action.payload;
         },
 
-        logout: (state, action) => {
-            localStorage.removeItem('cartProductsRMT');
+        logout: (state) => {
+            localStorage.removeItem('userRMT');
             return initialState;
         },
     }

@@ -10,14 +10,16 @@ export default {
             min_price = 0, 
             search = ''
         } = req.query;
-
+        
         const products = fakeDb.products.filter(product => {
-            return (product.category.includes(category) 
-                    && product.price > min_price
-                    && max_price !== null ? product.price <= max_price : false
-                    && (product.name.includes(search) || product.description.includes(search))
-                    );
-        })
+            if(product.category.includes(category) 
+                && product.price > min_price
+                && (max_price !== null ? product.price <= max_price : true)
+                && (product.name.includes(search) || product.description.includes(search))
+                ){
+                    return product;
+                }
+        });
 
         return res.json(products);
     }

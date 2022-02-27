@@ -5,6 +5,6 @@ const routes = Router();
 
 routes.get('/products', ProductController.index);
 
-routes.get('/login', SessionController.create)
+routes.post('/login', SessionController.create)
 
 export default routes;

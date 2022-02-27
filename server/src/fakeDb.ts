@@ -6,7 +6,7 @@ export const fakeDb = {
             description: "celular de última geração, com inteligência, ultra desempenho, 32gb ram, 2TB de armazenamento SSD.",
             price: 7800,
             image: "celular2077.png",
-            category: "celular"
+            category: "celulares"
         },
         {
             id: 2,
@@ -22,39 +22,39 @@ export const fakeDb = {
             description: "Computador última geração com ryzen 9 5500x, uma RTX 3090, 128gb ram, 5TB de armazenamento SSD",
             price: 18000,
             image: "pcC89.png",
-            category: "computador"
+            category: "computadores"
         },
         {
             id: 4,
             name: "Monitor Gamer 27 360hz",
-            description: "Monitor 27 polegadas com 360hz free sync, 0.2ms de tempo de resposta, resolução 4K",
+            description: "Monitores 27 polegadas com 360hz free sync, 0.2ms de tempo de resposta, resolução 4K",
             price: 7800,
-            image: "monitorGame27.png",
-            category: "monitor"
+            image: "monitoresGame27.png",
+            category: "monitores"
         },
         {
             id: 5,
             name: "Monitor Gamer 27 360hz",
-            description: "Monitor 27 polegadas com 360hz free sync, 0.2ms de tempo de resposta, resolução 4K",
+            description: "Monitores 27 polegadas com 360hz free sync, 0.2ms de tempo de resposta, resolução 4K",
             price: 7800,
-            image: "monitorGame27.png",
-            category: "monitor"
+            image: "monitoresGame27.png",
+            category: "monitores"
         },
         {
             id: 6,
-            name: "Monitor Gamer 27 360hz",
-            description: "Monitor 27 polegadas com 360hz free sync, 0.2ms de tempo de resposta, resolução 4K",
-            price: 7800,
-            image: "monitorGame27.png",
-            category: "monitor"
+            name: "Monitores Gamer 27 360hz",
+            description: "Monitores 27 polegadas com 360hz free sync, 0.2ms de tempo de resposta, resolução 4K",
+            price: 5400,
+            image: "monitoresGame27.png",
+            category: "monitores"
         },
         {
             id: 7,
             name: "Placa de Video",
             description: "",
-            price: 7800,
+            price: 4600,
             image: "placadevideo.png",
-            category: "componente"
+            category: "componentes"
         },
         {
             id: 8,
@@ -62,7 +62,7 @@ export const fakeDb = {
             description: "",
             price: 7800,
             image: "placadevideo.png",
-            category: "componente"
+            category: "componentes"
         },
         {
             id: 9,
@@ -70,7 +70,7 @@ export const fakeDb = {
             description: "",
             price: 7800,
             image: "placadevideo.png",
-            category: "componente"
+            category: "componentes"
         }
     ],
 

@@ -3,9 +3,11 @@ import { fakeDb } from "../fakeDb";
 import { UserGetProps, UserType } from "../types";
 
 export default {
-    create (req:Request<{},any,any,UserGetProps>, res: Response) {
+    create (req:Request<{}, any, UserGetProps, any>, res: Response) {
+        const { username, password } = req.body;
+
         const user: UserType = fakeDb.users.find(user => 
-            user.username === req.query.username && user.password === req.query.password
+            user.username === username && user.password === password
         );
     
     

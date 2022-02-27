@@ -4,6 +4,7 @@ type ThemeType = {
     primaryDarkColor: string;
     backgroundColor: string;
     backgroundLightColor: string;
+    textColor: string;
 }
 
 export const lightTheme: ThemeType = {
@@ -11,4 +12,5 @@ export const lightTheme: ThemeType = {
     primaryDarkColor: "#90E97B",
     backgroundColor: "#F8F8F8",
     backgroundLightColor: "#FFFFFF",
+    textColor: "#333333"
 }

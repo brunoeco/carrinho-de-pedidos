@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
-import { FilterState, PriceType } from '../types';
+import { FilterState } from '../types';
 
 const initialState: FilterState = {
     category: '',
     price: {
         min: 0,
         max: null,
-    }
+    },
+    search: '',
 };
 
 export const filterSlice = createSlice({
@@ -21,19 +22,38 @@ export const filterSlice = createSlice({
             };
         },
 
-        changePrice: (state, action: PayloadAction<PriceType>) => {
+        changeMinPrice: (state, action: PayloadAction<number>) => {
             
             return {
                 ...state,
                 price: {
-                    ...action.payload
+                    ...state.price,
+                    min: action.payload
                 }
+            }
+        },
+
+        changeMaxPrice: (state, action: PayloadAction<number | null>) => {
+            
+            return {
+                ...state,
+                price: {
+                    ...state.price,
+                    max: action.payload
+                }
+            }
+        },
+
+        changeSearch: (state, action: PayloadAction<string>) => {
+            return {
+                ...state,
+                search: action.payload
             }
         },
     }
 });
 
-export const { changeCategory, changePrice } = filterSlice.actions;
+export const { changeCategory, changeMinPrice, changeMaxPrice, changeSearch } = filterSlice.actions;
 
 export const selectFilter = (state: RootState) => state.filter;
 

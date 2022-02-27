@@ -5,6 +5,7 @@ import { useAppDispatch } from '../../app/hooks';
 import { login } from '../../app/reducers/userSlice';
 import { Container } from '../../GlobalStyles';
 import { IUser } from '../../models/Users';
+import { LoginButton, LoginFields, LoginForm } from './styles';
 
 export default function Login() {
     const [username, setUsername] = useState<string>("");
@@ -16,47 +17,55 @@ export default function Login() {
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const response = await connection.get('login', {
-            params: {
-                username,
-                password
-            }
-        });
-        
-        if(response.data.error) {
-            alert(response.data.error);
+        if(password.trim() === "" || username.trim() === "")
+            return alert('Preencha todos os campos.');
+
+        try {
+            const response = await connection.post('login', {
+                username: username,
+                password: password
+            })
+    
+            const user:IUser = response.data;
+    
+            dispatch(login(user));
+            navigate('/');
+        } catch(err) {
+            console.log(err);
+            alert('Usuario ou senha incorretos.');
             return;
         }
-
-        const user:IUser = response.data;
-
-        dispatch(login(user));
-        navigate('/');
     };
 
     return (
         <Container>
-            <form onSubmit={handleLogin} >
-                <label htmlFor="username">Usuário</label>
-                <input 
-                    type="text" 
-                    name="username"
-                    id="username" 
-                    value={username}
-                    onChange={e => setUsername(e.target.value)}
-                />
+            <LoginForm onSubmit={handleLogin} >
+                <LoginFields>
+                    <label htmlFor="username">Usuário</label>
+                    <input 
+                        type="text" 
+                        name="username"
+                        id="username"
+                        value={username}
+                        onChange={e => setUsername(e.target.value)}
+                        required
+                    />
+                </LoginFields>
 
-                <label htmlFor="password">Senha</label>
-                <input 
-                    type="password" 
-                    name="password" 
-                    id="password" 
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                />
+                <LoginFields>
+                    <label htmlFor="password">Senha</label>
+                    <input 
+                        type="password" 
+                        name="password" 
+                        id="password" 
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                        required
+                    />
+                </LoginFields>
 
-                <button>Entrar</button>
-            </form>
+                <LoginButton>Entrar</LoginButton>
+            </LoginForm>
         </Container>
     );
 }

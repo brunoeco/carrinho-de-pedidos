@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IUser } from '../../../models/Users';
+import { IUser } from '../../../models/User';
 import { RootState } from '../../store';
 
 export function getUser() {

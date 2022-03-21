@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IProduct } from '../../models/Products';
+import { IProduct } from '../../models/Product';
 import { AddCartButton, FavoriteProduct, ProductDescription, ProductImage, ProductInfo, ProductWrapper } from './styles';
 
 import productImage from '../../assets/image.png';

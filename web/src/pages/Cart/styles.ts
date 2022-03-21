@@ -53,8 +53,9 @@ export const CartBottom = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 40px;
+    gap: 30px;
     margin-right: 20px;
+    margin-top: 20px;
 `;
 
 export const CartFinishButton = styled.button`

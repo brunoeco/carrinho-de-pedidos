@@ -7,7 +7,7 @@ import Product from '../../components/Product';
 
 import SideBar from '../../components/SideBar';
 import { Container } from '../../GlobalStyles';
-import { IProduct } from '../../models/Products';
+import { IProduct } from '../../models/Product';
 import { HomeWrapper, PaginationButtons, ProductsListWrapper } from './styles';
 
 export default function Home() {

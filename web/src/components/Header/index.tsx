@@ -1,5 +1,5 @@
 import React from 'react'
-import { IoMdCart, IoIosHeart, IoIosSearch, IoMdPerson } from 'react-icons/io';
+import { IoMdCart, IoIosHeart, IoIosSearch } from 'react-icons/io';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
 import { cleanCart, selectCart } from '../../app/reducers/cartSlice';
@@ -54,7 +54,7 @@ export default function Header() {
 
 
                 <IconLinks>
-                    <Link to='/'>
+                    <Link to='/favorites'>
                         <IoIosHeart size="25" />
                     </Link>
 

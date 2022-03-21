@@ -15,25 +15,26 @@ export default function Cart() {
             <CartTitle>Carrinho de Pedidos</CartTitle>
             
             <CartWrapper>
-                <CartTable>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Descrição</th>
-                            <th>Qntd.</th>
-                            <th>Preço Unid.</th>
-                            <th>Subtotal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {cart.length > 0 
-                            ? cart.map(product => (
-                                <CartProduct key={product.id} {...product} />
-                            ))
-                            : <p>Nenhum produto no carrinho.</p>
-                        }
-                    </tbody>
-                </CartTable>
+                {cart.length > 0 ?
+                    <CartTable>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Descrição</th>
+                                <th>Qntd.</th>
+                                <th>Preço Unid.</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {cart.map(product => (
+                                    <CartProduct key={product.id} {...product} />
+                                ))}
+                        </tbody>
+                    </CartTable>
+                    
+                    : <p>Nenhum produto no carrinho.</p>
+                }
 
                 <CartBottom>
                     <p>Total: R$ {total.toFixed(2)}</p>

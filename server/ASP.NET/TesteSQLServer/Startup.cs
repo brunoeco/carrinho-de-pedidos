@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using TesteSQLServer.Services;
 
 namespace TesteSQLServer {
     public class Startup {
@@ -16,6 +17,8 @@ namespace TesteSQLServer {
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
 
+            services.AddScoped<UserService>();
+            services.AddScoped<SessionService>();
             services.AddControllers();
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TesteSQLServer", Version = "v1" });
@@ -30,6 +33,7 @@ namespace TesteSQLServer {
                     .AllowAnyHeader()
                     );
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +45,7 @@ namespace TesteSQLServer {
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
 

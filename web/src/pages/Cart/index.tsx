@@ -2,8 +2,8 @@ import React from 'react';
 import { useAppSelector } from '../../app/hooks';
 import { selectCart } from '../../app/reducers/cartSlice';
 import CartProduct from '../../components/CartProduct';
-import { Container } from '../../GlobalStyles';
-import { CartTable, CartWrapper, CartBottom, CartFinishButton, CartTitle } from './styles';
+import { Container, Title, Wrapper } from '../../GlobalStyles';
+import { CartTable, CartBottom, CartFinishButton } from './styles';
 
 export default function Cart() {
     const cart = useAppSelector(selectCart);
@@ -12,36 +12,40 @@ export default function Cart() {
 
     return (
         <Container>
-            <CartTitle>Carrinho de Pedidos</CartTitle>
+            <Title>Carrinho de Pedidos</Title>
             
-            <CartWrapper>
+            <Wrapper>
                 {cart.length > 0 ?
-                    <CartTable>
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Descrição</th>
-                                <th>Qntd.</th>
-                                <th>Preço Unid.</th>
-                                <th>Subtotal</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {cart.map(product => (
-                                    <CartProduct key={product.id} {...product} />
-                                ))}
-                        </tbody>
-                    </CartTable>
+                    <>
+                        <CartTable>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Descrição</th>
+                                    <th>Qntd.</th>
+                                    <th>Preço Unid.</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {cart.map(product => (
+                                        <CartProduct key={product.id} {...product} />
+                                    ))}
+                            </tbody>
+                        </CartTable>
+
+                        
+                        <CartBottom>
+                            <p>Total: R$ {total.toFixed(2)}</p>
+
+                            <CartFinishButton>Finalizar pedido</CartFinishButton>
+                        </CartBottom>
+                    </>
                     
-                    : <p>Nenhum produto no carrinho.</p>
+                    : <p className="message">Nenhum produto no carrinho.</p>
                 }
 
-                <CartBottom>
-                    <p>Total: R$ {total.toFixed(2)}</p>
-
-                    <CartFinishButton>Finalizar pedido</CartFinishButton>
-                </CartBottom>
-            </CartWrapper>
+            </Wrapper>
         </Container>
     )
 }

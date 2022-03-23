@@ -1,12 +1,12 @@
 import React from 'react';
 
-import productImage from '../../assets/image.png';
 import { useAppDispatch } from '../../app/hooks';
 import { ICartItem } from '../../types/product';
 
 import { AddButton, CartProductWrapper, ProductImage, RemoveButton, ProductDescription, AddProduct } from './styles';
 import { addProduct, removeProduct, removeQuantityOfProduct } from '../../app/reducers/cartSlice';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { baseURL } from '../../api/connection';
 
 export default function CartProduct(product: ICartItem) {
     const dispatch = useAppDispatch();
@@ -27,7 +27,7 @@ export default function CartProduct(product: ICartItem) {
     return(
         <CartProductWrapper>
             <td>
-                <ProductImage src={productImage} alt="product" />
+                <ProductImage src={`${baseURL}/images/${product.imageUrl}`} alt="product" />
             </td>
             <ProductDescription>
                 <h2>{product.name}</h2>

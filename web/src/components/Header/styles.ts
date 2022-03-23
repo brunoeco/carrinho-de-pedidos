@@ -41,14 +41,14 @@ export const SearchForm = styled.form`
         border: none;
         border-radius: 20px;
         padding-left: 15px;
-        padding-right: 40px;
+        padding-right: 15px;
 
         background-color: ${props => props.theme.backgroundColor};
     }
 
     button {
         position: absolute;
-        right: 15px;
+        right: 10px;
         width: 34px;
         height: 34px;
 

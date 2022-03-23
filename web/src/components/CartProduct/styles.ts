@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 
 export const CartProductWrapper = styled.tr`
+    border-bottom: 1px solid #cccccc;
+
     td:not(:nth-child(2)) {
         display: flex;
         flex-direction: column;

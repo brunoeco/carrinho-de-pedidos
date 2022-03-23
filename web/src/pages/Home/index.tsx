@@ -1,8 +1,10 @@
 import { Pagination } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { connection } from '../../api/connection';
-import { useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { changeFavorites } from '../../app/reducers/favoritesSlice';
 import { selectFilter } from '../../app/reducers/filterSlice';
+import { selectUser } from '../../app/reducers/userSlice';
 import Product from '../../components/Product';
 
 import SideBar from '../../components/SideBar';
@@ -12,7 +14,12 @@ import { HomeWrapper, PaginationButtons, ProductsListWrapper } from './styles';
 
 export default function Home() {
     const [products, setProducts] = useState<Array<IProduct>>([]);
+    const [loading, setLoading] = useState<boolean>(true);
     const [ page, setPage ] = useState<number>(0);
+    
+    const user = useAppSelector(selectUser);
+
+    const dispatch = useAppDispatch();
 
     const itensPerPage = 6;
     const pages = Math.ceil(products.length / itensPerPage);
@@ -35,8 +42,28 @@ export default function Home() {
             setProducts(response.data);
         }).catch(err => {
             console.log(err);
-        });;
-    }, [url])
+        });
+
+        if(user){
+            connection.get(`favorites`, {
+                params: {
+                    userId: user?.id
+                }
+            }).then(response => 
+                dispatch(changeFavorites(response.data))
+            )
+            .catch(err => {
+                console.log(err);
+                return [];
+            })
+        }
+
+        setLoading(false);
+    }, [user, url, dispatch])
+
+    if(loading) {
+        return <p className="message">Carregando...</p>
+    }
 
     return(
         <Container>
@@ -52,7 +79,7 @@ export default function Home() {
                     </PaginationButtons>
                     <ProductsListWrapper>
                         {currentItens.map((product) => (
-                            <Product key={product.id} {...product} />
+                            <Product key={product.id} product={product} />
                         ))}
                     </ProductsListWrapper>
                 </div>

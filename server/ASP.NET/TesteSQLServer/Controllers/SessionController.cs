@@ -8,33 +8,25 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using TesteSQLServer.DTOs;
+using TesteSQLServer.Services;
 
 namespace TesteSQLServer.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class SessionController : ControllerBase {
-        private IConfiguration _configuration;
-        private string _connectionString;
+        private SessionService _sessionService;
 
-        public SessionController(IConfiguration configuration) {
-            _configuration = configuration;
-            _connectionString = configuration.GetConnectionString("Default");
+        public SessionController(SessionService sessionService) {
+            _sessionService = sessionService;
         }
 
         [HttpPost]
-        public async Task<ActionResult<ReadUserDto>> Create([FromBody] CreateSessionDto createSessionDto) {
-            string query = $"SELECT * FROM users WHERE username = '{createSessionDto.Username}' AND password = '{createSessionDto.Password}'";
+        public ActionResult<ReadUserDto> Create([FromBody] CreateSessionDto createSessionDto) {
+            var user = _sessionService.Create(createSessionDto);
 
-            using (SqlConnection connection = new SqlConnection()) {
-                connection.ConnectionString = _connectionString;
-                connection.Open();
+            if(user != null) return Ok(user);
 
-                var user = await connection.QueryFirstOrDefaultAsync<ReadUserDto>(query);
-
-                if (user == null) return Unauthorized("Falha ao fazer login");
-
-                return user;
-            }
+            return Unauthorized("Usuário ou senha incorretos");
         }
     }
 }

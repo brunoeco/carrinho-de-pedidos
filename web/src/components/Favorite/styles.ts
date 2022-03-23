@@ -6,6 +6,8 @@ export const FavoriteWrapper = styled.div`
     grid-template-columns: 0.1fr 0.6fr 0.2fr 0.1fr;    
     align-items: center;
     gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #cccccc;
 
     img {
         width: 100%;
@@ -13,5 +15,9 @@ export const FavoriteWrapper = styled.div`
 
     span {
         justify-self: center;
+    
+        svg {
+            cursor: pointer
+        }
     }
 `;

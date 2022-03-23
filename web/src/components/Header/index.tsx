@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { IoMdCart, IoIosHeart, IoIosSearch } from 'react-icons/io';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
@@ -9,6 +9,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { HeaderWrapper, IconLinks, Profile, Logo, MenuList, SearchForm, LogoutButton } from './styles';
 
 import logoImage from '../../assets/logo.png';
+import { changeSearch } from '../../app/reducers/filterSlice';
 
 export default function Header() {
     const cart = useAppSelector(selectCart);
@@ -33,10 +34,14 @@ export default function Header() {
                 </Link>
 
                 <SearchForm>
-                    <input type="search" placeholder="Busque aqui" />
-                    <button>
+                    <input 
+                        type="search" 
+                        placeholder="Busque aqui"
+                        onChange={(e) => dispatch(changeSearch(e.target.value))}
+                    />
+                    {/* <button>
                         <IoIosSearch size="30" />
-                    </button>
+                    </button> */}
                 </SearchForm>
                 
                 <Profile>

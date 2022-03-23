@@ -24,14 +24,43 @@ namespace TesteSQLServer.Controllers {
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ReadOrderDto[]>> Index([FromRoute] int id) {
+        public async Task<ActionResult<ReadOrderDto[]>> Show([FromRoute] int id) {
 
             string query = $"SELECT * " +
                 $"FROM orders " +
                 $"INNER JOIN payments ON orders.PaymentId = payments.Id " +
                 $"INNER JOIN addresses ON orders.Id = addresses.OrderId " +
                 $"INNER JOIN orderItems ON orders.Id = orderItems.OrderId " +
-                $"WHERE UserId = {id}";
+                $"WHERE orders.Id = {id}";
+
+            using (SqlConnection connection = new SqlConnection()) {
+                connection.ConnectionString = _connectionString;
+                connection.Open();
+
+                var order = await connection.QueryAsync<ReadOrderDto, Payment, Address, OrderItem, ReadOrderDto>
+                    (query, (order, payment, address, orderItem) => {
+                        order.Payment = payment;
+                        order.Address = address;
+                        order.OrderItems.Add(orderItem);
+
+                        return order;
+                    });
+
+                if (!order.Any()) return NoContent();
+
+                return Ok(order.First());
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<ReadOrderDto[]>> Index([FromQuery] int userId) {
+
+            string query = $"SELECT * " +
+                $"FROM orders " +
+                $"INNER JOIN payments ON orders.PaymentId = payments.Id " +
+                $"INNER JOIN addresses ON orders.Id = addresses.OrderId " +
+                $"INNER JOIN orderItems ON orders.Id = orderItems.OrderId " +
+                $"WHERE UserId = {userId}";
 
             using (SqlConnection connection = new SqlConnection()) {
                 connection.ConnectionString = _connectionString;
@@ -92,7 +121,7 @@ namespace TesteSQLServer.Controllers {
 
                         await connection.QueryAsync(query);
 
-                        return NoContent();
+                        return Ok(orderId);
             }
         }
     }

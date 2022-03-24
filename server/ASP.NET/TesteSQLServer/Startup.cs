@@ -19,6 +19,9 @@ namespace TesteSQLServer {
 
             services.AddScoped<UserService>();
             services.AddScoped<SessionService>();
+            services.AddScoped<FavoriteService>();
+            services.AddScoped<OrderService>();
+            services.AddScoped<ProductService>();
             services.AddControllers();
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TesteSQLServer", Version = "v1" });

@@ -15,10 +15,10 @@ using TesteSQLServer.Services.Utils;
 namespace TesteSQLServer.Controllers {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase {
+    public class UserController : ControllerBase {
         private UserService _userService;
 
-        public UsersController(UserService userService) {
+        public UserController(UserService userService) {
             _userService = userService;
         }
 

@@ -10,13 +10,15 @@ using TesteSQLServer.Models;
 using TesteSQLServer.Services.Utils;
 
 namespace TesteSQLServer.Services {
-    public class SessionService : HashService {
+    public class SessionService {
         private IConfiguration _configuration;
         private string _connectionString;
+        private HashService _hashService;
 
-        public SessionService(IConfiguration configuration) {
+        public SessionService(IConfiguration configuration, HashService hashService) {
             _configuration = configuration;
             _connectionString = configuration.GetConnectionString("Default");
+            _hashService = hashService;
         }
 
         public ReadUserDto Create(CreateSessionDto createSessionDto) {
@@ -30,7 +32,7 @@ namespace TesteSQLServer.Services {
 
                 if (user == null) return null;
 
-                var result = VerifyPassword(user.Password_Hash, createSessionDto.Password);
+                var result = _hashService.VerifyPassword(user.Password_Hash, createSessionDto.Password);
 
                 var readUser = new ReadUserDto() {
                     Id = user.Id,

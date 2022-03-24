@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 
 namespace TesteSQLServer.Services.Utils {
     public class HashService {
-        protected string HashPassword(string password, byte[] salt = null, bool needsOnlyHash = false) {
+        public string HashPassword(string password, byte[] salt = null, bool needsOnlyHash = false) {
             if (salt == null || salt.Length != 16) {
                 salt = new byte[128 / 8];
 
@@ -26,7 +26,7 @@ namespace TesteSQLServer.Services.Utils {
             return $"{hashed}:{Convert.ToBase64String(salt)}";
         }
 
-        protected bool VerifyPassword(string hashedPasswordWithSalt, string passwordToCheck) {
+        public bool VerifyPassword(string hashedPasswordWithSalt, string passwordToCheck) {
             var passwordAndSalt = hashedPasswordWithSalt.Split(":");
 
             if (passwordAndSalt == null || passwordAndSalt.Length != 2) return false;

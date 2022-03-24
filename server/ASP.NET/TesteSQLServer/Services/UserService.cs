@@ -9,13 +9,17 @@ using TesteSQLServer.Services.Utils;
 using Dapper;
 
 namespace TesteSQLServer.Services {
-    public class UserService : HashService {
+    public class UserService {
         private IConfiguration _configuration;
         private string _connectionString;
+        private HashService _hashService;
 
-        public UserService(IConfiguration configuration) {
+
+        public UserService(IConfiguration configuration, HashService hashService) {
             _configuration = configuration;
             _connectionString = configuration.GetConnectionString("Default");
+
+            _hashService = hashService;
         }
 
         public bool Create(CreateUserDto createUserDto) {
@@ -29,7 +33,7 @@ namespace TesteSQLServer.Services {
 
                 if (result != null) return false;
 
-                var passwordhash = HashPassword(createUserDto.Password);
+                var passwordhash = _hashService.HashPassword(createUserDto.Password);
 
                 query = $"INSERT INTO users (Name, Email, Username, Password_Hash) " +
                     $"VALUES ('{createUserDto.Name}', '{createUserDto.Email}', '{createUserDto.Username}', '{passwordhash}')";

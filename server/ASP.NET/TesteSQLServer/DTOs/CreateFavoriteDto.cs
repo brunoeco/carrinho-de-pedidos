@@ -8,7 +8,5 @@ namespace TesteSQLServer.DTOs {
     public class CreateFavoriteDto {
         [Required]
         public int ProductId { get; set; }
-        [Required]
-        public int UserId { get; set; }
     }
 }

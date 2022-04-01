@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { connection } from '../../api/connection';
 
@@ -16,6 +17,7 @@ export default function Favorites() {
     const user = useAppSelector(selectUser);
 
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         setLoading(true);
@@ -23,14 +25,18 @@ export default function Favorites() {
         connection.get(`favorites`, {
             params: {
                 userId: user?.id
+            },
+            headers: {
+                Authorization:  `Bearer ${user?.token}`
             }
         }).then(response => {
             dispatch(changeFavorites(response.data));
             setLoading(false);
         }).catch(err => {
             console.log(err);
+            navigate('/login')
         })
-    }, [user?.id, dispatch])
+    }, [user?.id, dispatch, navigate])
 
     
 

@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace TesteSQLServer.DTOs {
     public class CreateOrderDto {
         [Required]
-        public int UserId { get; set; }
-        [Required]
         public int PaymentId { get; set; }
+        [Required]
         public CreateAddressDto Address { get; set; }
+        [Required]
         public CreateOrderItemDto[] OrderItems { get; set; }
     }
 }

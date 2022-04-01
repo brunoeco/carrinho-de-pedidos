@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import { IoMdCart, IoIosHeart, IoIosSearch } from 'react-icons/io';
+import React from 'react'
+import { IoMdCart, IoIosHeart } from 'react-icons/io';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
 import { cleanCart, selectCart } from '../../app/reducers/cartSlice';
@@ -39,9 +39,6 @@ export default function Header() {
                         placeholder="Busque aqui"
                         onChange={(e) => dispatch(changeSearch(e.target.value))}
                     />
-                    {/* <button>
-                        <IoIosSearch size="30" />
-                    </button> */}
                 </SearchForm>
                 
                 <Profile>
@@ -59,7 +56,7 @@ export default function Header() {
 
 
                 <IconLinks>
-                    <Link to='/favorites'>
+                    <Link to={user ? '/favorites' : '/login'}>
                         <IoIosHeart size="25" />
                     </Link>
 

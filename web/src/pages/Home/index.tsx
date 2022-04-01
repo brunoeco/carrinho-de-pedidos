@@ -47,7 +47,10 @@ export default function Home() {
         if(user){
             connection.get(`favorites`, {
                 params: {
-                    userId: user?.id
+                    userId: user.id
+                },
+                headers: {
+                    Authorization:  `Bearer ${user.token}`
                 }
             }).then(response => 
                 dispatch(changeFavorites(response.data))

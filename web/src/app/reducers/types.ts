@@ -1,3 +1,4 @@
+import { IUser } from "../../models/User";
 
 export type PriceType = {
     min: number;
@@ -9,3 +10,7 @@ export type FilterState = {
     price: PriceType;
     search: string;
 };
+
+export interface UserState extends IUser {
+    token: string;
+}

@@ -4,7 +4,7 @@ import { connection } from '../../api/connection';
 import { useAppDispatch } from '../../app/hooks';
 import { login } from '../../app/reducers/userSlice';
 import { Container } from '../../GlobalStyles';
-import { IUser } from '../../models/User';
+import { ILoginResponse } from '../../types/user';
 import { LoginButton, LoginFields, LoginForm } from './styles';
 
 export default function Login() {
@@ -21,14 +21,15 @@ export default function Login() {
             return alert('Preencha todos os campos.');
 
         try {
-            const response = await connection.post('session', {
+            const response = await connection.post<ILoginResponse>('sessions', {
                 username: username,
                 password: password
             })
     
-            const user:IUser = response.data;
-    
-            dispatch(login(user));
+            dispatch(login({ 
+                ...response.data.user, 
+                token: response.data.token
+            }));
             navigate('/');
         } catch(err) {
             console.log(err);

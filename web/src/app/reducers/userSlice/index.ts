@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IUser } from '../../../models/User';
 import { RootState } from '../../store';
+import { UserState } from '../types';
 
 export function getUser() {
     const user = localStorage.getItem('userRMT');
 
     if(user){
-        const userParsed: IUser = JSON.parse(user);
-
+        const userParsed: UserState = JSON.parse(user);
+        
         return userParsed;
     }
 
@@ -16,13 +16,13 @@ export function getUser() {
 
 const cacheItems = getUser();
 
-const initialState: IUser | null = cacheItems ? cacheItems : null;
+const initialState: UserState | null = cacheItems ? cacheItems : null;
 
 export const userSlice = createSlice({
     name: 'user',
     initialState: initialState,
     reducers: {
-        login: (state, action: PayloadAction<IUser>) => {
+        login: (state, action: PayloadAction<UserState>) => {
             localStorage.setItem('userRMT', JSON.stringify(action.payload));
             return action.payload;
         },

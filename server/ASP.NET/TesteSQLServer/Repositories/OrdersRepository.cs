@@ -1,26 +1,28 @@
 ﻿using Dapper;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
+using TesteSQLServer.Database.Interfaces;
 using TesteSQLServer.DTOs;
 using TesteSQLServer.Models;
+using TesteSQLServer.Repositories.Interfaces;
 
-namespace TesteSQLServer.Services {
-    public class OrderService {
-        private IConfiguration _configuration;
-        private string _connectionString;
+namespace TesteSQLServer.Repositories
+{
+    public class OrdersRepository : IOrdersRepository 
+    {
+        private IConnection Connection;
 
-        public OrderService(IConfiguration configuration) {
-            _configuration = configuration;
-            _connectionString = configuration.GetConnectionString("Default");
+        public OrdersRepository(IConnection connection)
+        {
+            Connection = connection;
         }
 
-        public ReadOrderDto Show(int id) {
-            using (SqlConnection connection = new SqlConnection()) {
-                connection.ConnectionString = _connectionString;
+        public ReadOrderDto GetOrderById(int id)
+        {
+            using (IDbConnection connection = Connection.GetConnection())
+            {
                 connection.Open();
 
                 string query = $"SELECT * " +
@@ -31,8 +33,10 @@ namespace TesteSQLServer.Services {
                     $"WHERE orders.Id = {id}";
 
                 var order = connection.Query<ReadOrderDto, Payment, Address, OrderItem, ReadOrderDto>
-                    (query, (order, payment, address, orderItem) => {
-                        if (order.OrderItems == null) {
+                    (query, (order, payment, address, orderItem) => 
+                    {
+                        if (order.OrderItems == null)
+                        {
                             order.OrderItems = new List<OrderItem>();
                         }
 
@@ -43,15 +47,19 @@ namespace TesteSQLServer.Services {
                         return order;
                     });
 
-                if (!order.Any()) return null;
+                if (!order.Any())
+                {
+                    return null;
+                }
 
                 return order.First();
             }
         }
 
-        public IEnumerable<ReadOrderDto> Index(int userId) {
-            using (SqlConnection connection = new SqlConnection()) {
-                connection.ConnectionString = _connectionString;
+        public IEnumerable<ReadOrderDto> GetAllOrdersByUserId(string userId)
+        {
+            using (IDbConnection connection = Connection.GetConnection())
+            {
                 connection.Open();
 
                 string query = $"SELECT * " +
@@ -67,11 +75,13 @@ namespace TesteSQLServer.Services {
                     (query, (order, payment, address, orderItem) => {
                         ReadOrderDto tempOrder;
 
-                        if (!orders.TryGetValue(order.Id, out tempOrder)) {
+                        if (!orders.TryGetValue(order.Id, out tempOrder))
+                        {
                             orders.Add(order.Id, tempOrder = order);
                         }
 
-                        if (tempOrder.OrderItems == null) {
+                        if (tempOrder.OrderItems == null)
+                        {
                             tempOrder.OrderItems = new List<OrderItem>();
                         }
 
@@ -86,13 +96,14 @@ namespace TesteSQLServer.Services {
             }
         }
 
-        public int Create(CreateOrderDto createOrderDto) {
-            using (SqlConnection connection = new SqlConnection()) {
-                connection.ConnectionString = _connectionString;
+        public int CreateOrder(CreateOrderDto createOrderDto, string userId)
+        {
+            using (IDbConnection connection = Connection.GetConnection())
+            {
                 connection.Open();
 
                 string query = $"INSERT INTO orders (UserId, PaymentId, CreatedAt) " +
-                    $"VALUES ({createOrderDto.UserId}, {createOrderDto.PaymentId}, '{DateTime.Now.Date.ToString("dd/MM/yyyy")}') " +
+                    $"VALUES ({userId}, {createOrderDto.PaymentId}, '{DateTime.Now.Date.ToString("dd/MM/yyyy")}') " +
                     $"SELECT SCOPE_IDENTITY()";
 
                 var orderId = connection.QueryFirst<int>(query);

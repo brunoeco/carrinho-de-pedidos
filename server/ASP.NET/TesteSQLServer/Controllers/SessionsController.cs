@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TesteSQLServer.DTOs;
-using TesteSQLServer.Services.Interfaces;
+using TesteSQLServer.Services.Sessions;
 
 namespace TesteSQLServer.Controllers
 {
@@ -8,7 +8,7 @@ namespace TesteSQLServer.Controllers
     [ApiController]
     public class SessionsController : ControllerBase
     {
-        private ISessionsService SessionService;
+        private readonly ISessionsService SessionService;
 
         public SessionsController(ISessionsService sessionService) 
         {

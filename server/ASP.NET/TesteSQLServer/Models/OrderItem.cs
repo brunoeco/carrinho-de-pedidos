@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 namespace TesteSQLServer.Models {
     public class OrderItem {
         [Required]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [JsonIgnore]
         [Required]
-        public int OrderId { get; set; }
+        public Guid OrderId { get; set; }
         [Required]
-        public int ProductId { get; set; }
+        public Guid ProductId { get; set; }
         [Required]
         public decimal Price { get; set; }
         [Required]

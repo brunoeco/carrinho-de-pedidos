@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using TesteSQLServer.DTOs;
-using TesteSQLServer.Services.Interfaces;
+using TesteSQLServer.Services.Orders;
 
 namespace TesteSQLServer.Controllers
 {
@@ -10,7 +10,7 @@ namespace TesteSQLServer.Controllers
     [ApiController]
     public class OrdersController : ControllerBase 
     {
-        private IOrdersService OrderService;
+        private readonly IOrdersService OrderService;
 
         public OrdersController(IOrdersService orderService) 
         {
@@ -19,7 +19,7 @@ namespace TesteSQLServer.Controllers
 
         [HttpGet("{id}")]
         [Authorize]
-        public ActionResult<ReadOrderDto> Show([FromRoute] int id)
+        public ActionResult<ReadOrderDto> Show([FromRoute] string id)
         {
             var order = OrderService.GetOrderById(id);
 
@@ -43,7 +43,7 @@ namespace TesteSQLServer.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult<int> Create([FromBody] CreateOrderDto createOrderDto)
+        public ActionResult<string> Create([FromBody] CreateOrderDto createOrderDto)
         {
             var orderId = OrderService.CreateOrder(createOrderDto, this.HttpContext);
 

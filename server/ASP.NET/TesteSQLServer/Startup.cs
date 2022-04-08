@@ -1,3 +1,4 @@
+using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,13 +7,27 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using TesteSQLServer.Database;
-using TesteSQLServer.Database.Interfaces;
+using System.Reflection;
+using TesteSQLServer.Context;
+using TesteSQLServer.Context.Interfaces;
+using TesteSQLServer.Migrations;
+using TesteSQLServer.Migrations.Interfaces;
 using TesteSQLServer.Repositories;
-using TesteSQLServer.Repositories.Interfaces;
+using TesteSQLServer.Repositories.Favorites;
+using TesteSQLServer.Repositories.Orders;
+using TesteSQLServer.Repositories.Payments;
+using TesteSQLServer.Repositories.Products;
+using TesteSQLServer.Repositories.Users;
 using TesteSQLServer.Services;
-using TesteSQLServer.Services.Interfaces;
+using TesteSQLServer.Services.Favorites;
+using TesteSQLServer.Services.Orders;
+using TesteSQLServer.Services.Payments;
+using TesteSQLServer.Services.Products;
+using TesteSQLServer.Services.Sessions;
+using TesteSQLServer.Services.Users;
 using TesteSQLServer.Services.Utils;
+using TesteSQLServer.Services.Utils.Hash;
+using TesteSQLServer.Services.Utils.Token;
 
 namespace TesteSQLServer
 {
@@ -28,12 +43,20 @@ namespace TesteSQLServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) 
         {
-            services.AddScoped<IConnection, Connection>();
+            services.AddSingleton<IConnection, DapperContext>();
+            services.AddSingleton<IDatabase, Database>();
+
+            services.AddLogging(c => c.AddFluentMigratorConsole())
+                .AddFluentMigratorCore()
+                .ConfigureRunner(c => c.AddSqlServer()
+                    .WithGlobalConnectionString(Configuration.GetConnectionString("SqlConnection"))
+                    .ScanIn(Assembly.GetExecutingAssembly()).For.Migrations());
 
             services.AddScoped<IFavoritesRepository, FavoritesRepository>();
             services.AddScoped<IOrdersRepository, OrdersRepository>();
             services.AddScoped<IProductsRepository, ProductsRepository>();
             services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<IPaymentsRepository, PaymentsRepository>();
 
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IHashService, HashService>();
@@ -43,6 +66,7 @@ namespace TesteSQLServer
             services.AddScoped<IFavoritesService, FavoritesService>();
             services.AddScoped<IOrdersService, OrdersService>();
             services.AddScoped<IProductsService, ProductsService>();
+            services.AddScoped<IPaymentsService, PaymentsService>();
 
             services.AddControllers();
 

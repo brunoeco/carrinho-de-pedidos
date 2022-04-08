@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using TesteSQLServer.DTOs;
-using TesteSQLServer.Services.Interfaces;
+using TesteSQLServer.Services.Favorites;
 
 namespace TesteSQLServer.Controllers
 {
@@ -10,7 +10,7 @@ namespace TesteSQLServer.Controllers
     [ApiController]
     public class FavoritesController : ControllerBase 
     {
-        private IFavoritesService FavoriteService;
+        private readonly IFavoritesService FavoriteService;
 
         public FavoritesController(IFavoritesService favoriteService) 
         {
@@ -19,7 +19,7 @@ namespace TesteSQLServer.Controllers
 
         [HttpGet("{id}")]
         [Authorize]
-        public ActionResult<ReadFavoriteDto> Show([FromRoute] int id) 
+        public ActionResult<ReadFavoriteDto> Show([FromRoute] string id) 
         {
             var favorite = FavoriteService.GetFavoriteById(id, this.HttpContext);
 
@@ -42,7 +42,7 @@ namespace TesteSQLServer.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult<int> Create([FromBody] CreateFavoriteDto createFavoriteDto) 
+        public ActionResult<string> Create([FromBody] CreateFavoriteDto createFavoriteDto) 
         {
             var favoriteId = FavoriteService.CreateFavorite(createFavoriteDto, this.HttpContext);
 
@@ -51,7 +51,7 @@ namespace TesteSQLServer.Controllers
 
         [HttpDelete("{id}")]
         [Authorize]
-        public ActionResult Destroy([FromRoute] int id)
+        public ActionResult Destroy([FromRoute] string id)
         {
             FavoriteService.DeleteFavorite(id, this.HttpContext);
 

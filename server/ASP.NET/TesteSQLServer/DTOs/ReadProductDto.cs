@@ -9,7 +9,7 @@ using TesteSQLServer.Models;
 namespace TesteSQLServer.DTOs {
     public class ReadProductDto {
         [Required]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }

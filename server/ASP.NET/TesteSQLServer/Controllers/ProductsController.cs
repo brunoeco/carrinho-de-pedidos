@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using TesteSQLServer.DTOs;
 using TesteSQLServer.Models;
-using TesteSQLServer.Services.Interfaces;
+using TesteSQLServer.Services.Products;
 
 namespace TesteSQLServer.Controllers
 {
@@ -10,7 +10,7 @@ namespace TesteSQLServer.Controllers
     [ApiController]
     public class ProductsController : ControllerBase 
     {
-        private IProductsService ProductService;
+        private readonly IProductsService ProductService;
 
         public ProductsController(IProductsService productService) 
         {

@@ -7,15 +7,15 @@ using TesteSQLServer.Models;
 
 namespace TesteSQLServer.DTOs {
     public class ReadOrderDto {
-        public int Id { get; set; }
-        public int UserId { get; set; }
-        public int PaymentId { get; set; }
+        public Guid Id { get; set; }
+        public Guid UserId { get; set; }
+        public Guid PaymentId { get; set; }
         public DateTime CreatedAt { get; set; }
 
-        public Payment Payment { get; set; }
+        public ReadPaymentDto Payment { get; set; }
         [JsonIgnore]
         public User User { get; set; }
-        public Address Address { get; set; }
-        public List<OrderItem> OrderItems { get; set; }
+        public ReadAddressDto Address { get; set; }
+        public List<ReadOrderItemDto> OrderItems { get; set; }
     }
 }

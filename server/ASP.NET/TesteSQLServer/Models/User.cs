@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace TesteSQLServer.Models {
     public class User {
         [Required]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
@@ -21,7 +21,7 @@ namespace TesteSQLServer.Models {
         public string Username { get; set; }
         [Required]
         [DataType(DataType.Password)]
-        public string Password_Hash { get; set; }
+        public string PasswordHash { get; set; }
 
         [JsonIgnore]
         public List<Order> Orders { get; set; }

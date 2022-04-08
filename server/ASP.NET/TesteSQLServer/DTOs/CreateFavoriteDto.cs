@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 namespace TesteSQLServer.DTOs {
     public class CreateFavoriteDto {
         [Required]
-        public int ProductId { get; set; }
+        public Guid ProductId { get; set; }
     }
 }

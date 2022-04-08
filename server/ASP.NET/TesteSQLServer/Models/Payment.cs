@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace TesteSQLServer.Models {
     public class Payment {
         [Required]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [MaxLength(50)]
         [Required]
         public string Name { get; set; }

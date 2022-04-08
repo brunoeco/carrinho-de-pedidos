@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace TesteSQLServer.Models {
     public class Favorite {
         [Required]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [Required]
-        public int ProductId { get; set; }
+        public Guid ProductId { get; set; }
         [Required]
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         [Required]
         public DateTime CreatedAt { get; set; }
 

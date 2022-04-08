@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TesteSQLServer.DTOs {
     public class ReadUserDto {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string Username { get; set; }

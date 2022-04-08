@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace TesteSQLServer.DTOs {
     public class CreateOrderItemDto {
         [Required]
-        public int ProductId { get; set; }
+        public Guid ProductId { get; set; }
         [Required]
         public int Quantity { get; set; }
     }

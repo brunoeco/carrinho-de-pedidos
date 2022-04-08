@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace TesteSQLServer.Models {
     public class Product {
         [Required]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }

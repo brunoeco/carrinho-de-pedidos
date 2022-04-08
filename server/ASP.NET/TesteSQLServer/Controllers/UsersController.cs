@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TesteSQLServer.DTOs;
-using TesteSQLServer.Services.Interfaces;
+using TesteSQLServer.Services.Users;
 
 namespace TesteSQLServer.Controllers
 {
@@ -8,7 +8,7 @@ namespace TesteSQLServer.Controllers
     [ApiController]
     public class UsersController : ControllerBase 
     {
-        private IUsersService UserService;
+        private readonly IUsersService UserService;
 
         public UsersController(IUsersService userService)
         {

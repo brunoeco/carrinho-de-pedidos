@@ -28,7 +28,7 @@ namespace TesteSQLServer.Controllers
                 return Ok(favorite);
             }
 
-            return NoContent();
+            return NotFound();
         }
 
         [HttpGet]

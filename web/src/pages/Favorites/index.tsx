@@ -36,7 +36,7 @@ export default function Favorites() {
             console.log(err);
             navigate('/login')
         })
-    }, [user?.id, dispatch, navigate])
+    }, [user?.id, user?.token, dispatch, navigate])
 
     
 
